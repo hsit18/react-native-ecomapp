@@ -1,2 +1,1 @@
-# react-native-ecomapp
-react-native-ecomapp
+# React Native app
