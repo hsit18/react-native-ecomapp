@@ -1,23 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import * as React from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 
-import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const App = () => {
-  return (
-    <View>
-      <Text>Ecom App</Text>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" />
+import useCachedResources from "./hooks/useCachedResources";
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
+import LinkingConfiguration from "./navigation/LinkingConfiguration";
+
+const Stack = createStackNavigator();
+
+const App = (props) => {
+  const isLoadingComplete = useCachedResources();
+
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
+      <View style={styles.container}>
+        {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
+        <NavigationContainer linking={LinkingConfiguration}>
+          <Stack.Navigator>
+            <Stack.Screen name="Root" component={BottomTabNavigator} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </View>
-    </View>
-  );
+    );
+  }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
 
 export default App;
