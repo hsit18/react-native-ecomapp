@@ -13,7 +13,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Categories</Text>
-      {categories.map((c) => (
+      {categories && categories.map((c) => (
         <Text>{c.name}</Text>
       ))}
     </View>
