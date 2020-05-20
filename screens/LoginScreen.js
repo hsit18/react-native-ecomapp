@@ -14,15 +14,19 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={{ height: height / 3 }}>
         <View style={styles.button}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>SIGN IN</Text>
+          <Text
+            style={{ fontSize: 20, fontWeight: "bold" }}
+            onPress={() => navigation.navigate("Root")}
+          >
+            SIGN IN
+          </Text>
         </View>
 
         <View style={{ ...styles.button, backgroundColor: "#2E71DC" }}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>Google SIGN IN</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
+            GOOGLE SIGN IN
+          </Text>
         </View>
-
-        <Text>Google Sign In</Text>
-        <Text onPress={() => navigation.navigate("Root")}>Go to home</Text>
       </View>
     </View>
   );
