@@ -1,23 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-
-const NewsCards = (cards) => {
-    return cards.map(
-        element => {
-            return (
-                <NewsCard
-                    title={element.title}
-                    imageUrl={element.imageUrl}
-                    date={element.date}
-                    day={element.day}
-                    newsBody={element.newsBody}
-                />
-            );
-        }
-    );
-};
 
 
 const NewsCard = (cardData) => {
@@ -66,10 +50,10 @@ const NewsCard = (cardData) => {
 const styles = StyleSheet.create({
     cardContainer: {
         flex: 1,
-        padding: 10,
+        paddingBottom: 10,
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: "black",
     },
     cardImage: {

@@ -1,9 +1,9 @@
-import * as React from "react";
-import { StyleSheet,  View, Image } from "react-native";
+import  React, {useState, useEffect} from "react";
+import { StyleSheet, View, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "./Card";
 
-var  cards = [
+var cards = [
   {
     "title": "Indian Cruise",
     "imageUrl": require("../assets/images/stone-town.jpg"),
@@ -22,6 +22,10 @@ var  cards = [
 
 
 const NewsScreen = () => {
+  // api remaining
+  const newsCards = cards.map(function (card) {
+    return <NewsCard {...card} />
+  })
   return (
     <View style={styles.container}>
       <View style={styles.imageView}>
@@ -34,11 +38,7 @@ const NewsScreen = () => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        {/* some issue here*/}
-        {/* <NewsCards {...cards} /> */}
-        <NewsCard
-          {...cards[0]}
-        />
+        {newsCards}
       </ScrollView>
     </View>
   );
@@ -51,10 +51,10 @@ NewsScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#7F8C8D",
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 10,
   },
 
   getStartedText: {
