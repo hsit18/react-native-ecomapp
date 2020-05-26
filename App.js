@@ -23,15 +23,10 @@ const App = (props) => {
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name="Login"
               component={LoginScreen}
               options={{ headerShown: false }}
-            /> */}
-            <Stack.Screen
-               name="News"
-               component={NewsScreen}
-               options={{headerShown: false}}
             />
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
