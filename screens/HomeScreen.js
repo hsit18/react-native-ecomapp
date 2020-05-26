@@ -4,7 +4,11 @@ import { StyleSheet, Text, View } from "react-native";
 const HomeScreen = () => {
   const [categories, setCategories] = useState();
   useEffect(() => {
-    fetch("https://evening-tor-29203.herokuapp.com/api/v1/categories")
+    fetch("https://evening-tor-29203.herokuapp.com/api/v1/categories",
+    {
+      method: "PUT",
+      mode: "cors",
+    })
       .then((res) => res.json())
       .then((res) => {
         setCategories(res.categories || []);

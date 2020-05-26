@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 
@@ -18,15 +18,15 @@ const NewsCard = (cardData) => {
                 {cardData.title}
             </Text>
             <Text style={styles.cardMetadata}>
-                {cardData.date}, {cardData.day}
+                {cardData.publishedAt}
             </Text>
             <Image
                 style={styles.cardImage}
-                source={cardData.imageUrl}
+                source={cardData.urlToImage}
             />
             {!fullCardFlag && <ScrollView>
                 <Text style={styles.newsBody}>
-                    {cardData.newsBody.substring(0, 200)} ...
+                    {cardData.description}
                 </Text>
                 <Button
                     title="view complete story"
@@ -35,7 +35,7 @@ const NewsCard = (cardData) => {
             </ScrollView>}
             {fullCardFlag && <ScrollView>
                 <Text style={styles.newsBody}>
-                    {cardData.newsBody}
+                    {cardData.content}
                 </Text>
                 <Button
                     title="back"

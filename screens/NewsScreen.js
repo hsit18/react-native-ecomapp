@@ -1,31 +1,21 @@
-import  React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "./Card";
 
-var cards = [
-  {
-    "title": "Indian Cruise",
-    "imageUrl": require("../assets/images/stone-town.jpg"),
-    "date": "12 December 2020",
-    "day": "monday",
-    "newsBody": "It’s not an aroma you forget in a hurry. Here I was nibbling a piece of jackfruit – the vegan ingredient du jour – on the island of Kwale in the Zanzibar archipelago. The ripe, unopened fruit has a distinctive, rather unpleasant odour, although our guide assured us it “tastes like pineapple and mango.” We had sailed into the Menai Bay conservation area on a traditional dhow boat crafted from African mahogany. Sipping from fresh coconuts, we stopped to snorkel in the translucent Indian Ocean with a school of sergeant major fish, marvel at the coral formations and dodge a foreboding rain shower."
-  },
-  {
-    "title": "Indian Cruise",
-    "imageUrl": require("../assets/images/stone-town.jpg"),
-    "date": "12 December 2020",
-    "day": "monday",
-    "newsBody": "It’s not an aroma you forget in a hurry. Here I was nibbling a piece of jackfruit – the vegan ingredient du jour – on the island of Kwale in the Zanzibar archipelago. The ripe, unopened fruit has a distinctive, rather unpleasant odour, although our guide assured us it “tastes like pineapple and mango.” We had sailed into the Menai Bay conservation area on a traditional dhow boat crafted from African mahogany. Sipping from fresh coconuts, we stopped to snorkel in the translucent Indian Ocean with a school of sergeant major fish, marvel at the coral formations and dodge a foreboding rain shower."
-  }
-]
-
 
 const NewsScreen = () => {
-  // api remaining
-  const newsCards = cards.map(function (card) {
+  const [newsCards, setNewsCards] = useState([])
+  useEffect(() => {
+    fetch("http://www.mocky.io/v2/5eca75ad3000009300a6cfd9")
+    .then((res) => res.json())  
+    .then((res) => {
+        setNewsCards(res.articles);
+    })
+  }, []);
+  const newsCardsDisplay = newsCards.map(function (card) {
     return <NewsCard {...card} />
-  })
+  });
   return (
     <View style={styles.container}>
       <View style={styles.imageView}>
@@ -38,7 +28,7 @@ const NewsScreen = () => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        {newsCards}
+        {newsCardsDisplay}
       </ScrollView>
     </View>
   );
@@ -51,7 +41,7 @@ NewsScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#7F8C8D",
+    backgroundColor: "#CCD1D1",
   },
   contentContainer: {
     paddingTop: 10,
