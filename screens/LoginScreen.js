@@ -1,9 +1,22 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, Dimensions, Alert } from "react-native";
+import Button from "../components/Button";
+import { TextInput } from "react-native-gesture-handler";
 
 const { height, width } = Dimensions.get("screen");
 
 const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = () => {
+    if (username === "admin") {
+      navigation.navigate("Root");
+    } else {
+      Alert.alert("Invalid User.");
+    }
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: "flex-end" }}>
       <View style={{ ...StyleSheet.absoluteFill }}>
@@ -13,35 +26,38 @@ const LoginScreen = ({ navigation }) => {
         />
       </View>
       <View style={{ height: height / 3 }}>
-        <View style={styles.button}>
-          <Text
-            style={{ fontSize: 20, fontWeight: "bold" }}
-            onPress={() => navigation.navigate("Root")}
-          >
-            SIGN IN
-          </Text>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <TextInput
+            style={{
+              height: 40,
+              color: "#fff",
+              width: width / 2,
+              borderBottomColor: "#fff",
+              borderBottomWidth: 1,
+            }}
+            placeholder="Username"
+            onChangeText={setUsername}
+            defaultValue=""
+          />
+          <TextInput
+            style={{
+              height: 40,
+              color: "#fff",
+              width: width / 2,
+              borderBottomColor: "#fff",
+              borderBottomWidth: 1,
+            }}
+            placeholder="Password"
+            onChangeText={setPassword}
+            defaultValue=""
+            secureTextEntry
+          />
         </View>
 
-        <View style={{ ...styles.button, backgroundColor: "#2E71DC" }}>
-          <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
-            GOOGLE SIGN IN
-          </Text>
-        </View>
+        <Button text="SIGN IN" onPress={onSubmit} />
       </View>
     </View>
   );
-};
-
-const styles = {
-  button: {
-    backgroundColor: "white",
-    height: 70,
-    marginHorizontal: 20,
-    borderRadius: 35,
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 5,
-  },
 };
 
 export default LoginScreen;

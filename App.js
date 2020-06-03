@@ -8,11 +8,10 @@ import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginScreen from "./screens/LoginScreen";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
-import NewsScreen from "./screens/NewsScreen";
 
 const Stack = createStackNavigator();
 
-const App = (props) => {
+const App = () => {
   const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {

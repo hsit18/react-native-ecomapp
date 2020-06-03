@@ -22,6 +22,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.harpreet.ecomApp",
+      "versionCode": 1
+    },
     "ios": {
       "supportsTablet": true
     },
