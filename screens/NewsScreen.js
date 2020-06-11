@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import {  View, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import NewsCard from "./Card";
-
+import NewsCard from "../components/Card";
+import styles from '../style/screens.newsScreen.style.js'; 
 
 const NewsScreen = () => {
   const [newsCards, setNewsCards] = useState([])
@@ -14,7 +14,7 @@ const NewsScreen = () => {
     })
   }, []);
   const newsCardsDisplay = newsCards.map(function (card) {
-    return <NewsCard {...card} />
+    return <View style={styles.individualCard}><NewsCard {...card} /></View>
   });
   return (
     <View style={styles.container}>
@@ -25,7 +25,6 @@ const NewsScreen = () => {
         />
       </View>
       <ScrollView
-        style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
         {newsCardsDisplay}
@@ -37,33 +36,5 @@ const NewsScreen = () => {
 NewsScreen.navigationOptions = {
   header: null,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#CCD1D1",
-  },
-  contentContainer: {
-    paddingTop: 10,
-  },
-
-  getStartedText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "rgba(0,0,0, 1)",
-    lineHeight: 30,
-    textAlign: "center",
-  },
-
-  imageView: {
-    paddingTop: 30,
-    alignItems: "center"
-  },
-
-  logo: {
-    width: 350,
-    height: 150,
-  }
-});
 
 export default NewsScreen;

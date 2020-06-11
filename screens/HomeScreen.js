@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {  Text, View } from "react-native";
+import styles from '../style/screens.homeScreen.style.js';
 
 const HomeScreen = () => {
   const [categories, setCategories] = useState();
@@ -27,12 +28,5 @@ const HomeScreen = () => {
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
 
 export default HomeScreen;

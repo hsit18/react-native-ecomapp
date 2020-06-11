@@ -8,6 +8,7 @@ import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginScreen from "./screens/LoginScreen";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
+import NewsScreen from "./screens/NewsScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,10 +23,15 @@ const App = () => {
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Login"
               component={LoginScreen}
               options={{ headerShown: false }}
+            /> */}
+            <Stack.Screen
+              name="NewsScreen"
+              component={NewsScreen}
+              options={{headerShown: false}}
             />
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
