@@ -9,6 +9,7 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import LoginScreen from "./screens/LoginScreen";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import NewsScreen from "./screens/NewsScreen";
+import NewsCardDetail from "./components/NewsCardDetail";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,11 @@ const App = () => {
               name="NewsScreen"
               component={NewsScreen}
               options={{headerShown: false}}
+            />
+            <Stack.Screen
+               name="NewsCardDetail"
+               component={NewsCardDetail}
+               options={{headerShown: false}}
             />
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>

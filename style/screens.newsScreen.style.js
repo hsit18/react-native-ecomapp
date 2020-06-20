@@ -1,6 +1,13 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
+    heading: {
+       textAlign: "center",
+       paddingTop: 20,
+       fontSize: 20,
+       color: "black",
+       fontWeight: "bold"
+    },
     container: {
       backgroundColor: "white"
     },
