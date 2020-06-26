@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
-import {  Text,View } from "react-native";
+import React, { useEffect } from "react";
+import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import NewsCard from "../components/Card";
-import styles from '../style/screens.newsScreen.style.js'; 
+import styles from '../style/screens.newsScreen.style.js';
+import { connect } from "react-redux";
 
-const NewsScreen = ({navigation}) => {
-  const [newsCards, setNewsCards] = useState([])
-  useEffect(() => {
-    fetch("http://www.mocky.io/v2/5eca75ad3000009300a6cfd9")
-    .then((res) => res.json())  
-    .then((res) => {
-        setNewsCards(res.articles);
-    })
-  }, []);
-  const newsCardsDisplay = newsCards.map(function (card) {
-    return <View style={styles.individualCard}><NewsCard cardData={card} navigation={navigation}/></View>
+
+const NewsScreen = ({ navigation }) => {
+  this.props.getAllData()
+  const newsCardsDisplay = this.props.data.map(function (card) {
+    return <View style={styles.individualCard}><NewsCard cardData={card} navigation={navigation} /></View>
   });
   return (
     <View style={styles.container}>
@@ -28,8 +23,21 @@ const NewsScreen = ({navigation}) => {
   );
 };
 
+
+const mapStateToProps = (state) => {
+    return {
+      data : state.data
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllData : () => dispatch({type: "GET_ALL"})
+  }
+}
+
 NewsScreen.navigationOptions = {
   header: null,
 };
 
-export default NewsScreen;
+export default connect(mapStateToProps,mapDispatchToProps)(NewsScreen);

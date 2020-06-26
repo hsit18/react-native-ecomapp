@@ -10,8 +10,57 @@ import LoginScreen from "./screens/LoginScreen";
 import LinkingConfiguration from "./navigation/LinkingConfiguration";
 import NewsScreen from "./screens/NewsScreen";
 import NewsCardDetail from "./components/NewsCardDetail";
+import NewsCard from "./components/Card";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import {GetNews} from "./services/newsApi";
+
 
 const Stack = createStackNavigator();
+
+const News = () => {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="NewsScreen"
+          component={NewsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NewsCard"
+          component={NewsCard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NewsCardDetail"
+          component={NewsCardDetail}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+const initialState = {
+  data: [{
+    title: "blabber",
+    urlToImage: "",
+    content: "blabber"
+  }]
+}
+
+const reducer = (state = initialState,action) => {
+    switch(action.type){
+      case "GET_ALL":
+        return {
+          data: initialState
+        }
+    }
+    return state;
+}
+
+const store = createStore(reducer)
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
@@ -20,29 +69,26 @@ const App = () => {
     return null;
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
-        <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
-            {/* <Stack.Screen
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
+          <NavigationContainer linking={LinkingConfiguration}>
+            <Stack.Navigator>
+              {/* <Stack.Screen
               name="Login"
               component={LoginScreen}
               options={{ headerShown: false }}
             /> */}
-            <Stack.Screen
-              name="NewsScreen"
-              component={NewsScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-               name="NewsCardDetail"
-               component={NewsCardDetail}
-               options={{headerShown: false}}
-            />
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+              <Stack.Screen
+                name="News"
+                component={News}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen name="Root" component={BottomTabNavigator} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </View>
+      </Provider>
     );
   }
 };
